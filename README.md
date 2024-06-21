@@ -1,71 +1,75 @@
 # HA-MQTT-mock
 
-本项目提供一个简单的 MQTT mock 服务, 用来模拟 Home Assistant 中的各种 MQTT 设备。
+>[!NOTE]
+> Original README.md is in Chinese. This is the English translation by Copilot.
 
-在使用本服务前，你需要先配置好你的 Home Assistant 以及 MQTT 服务。
 
-## 特性
+This project provides a simple MQTT mock service to simulate various MQTT devices in Home Assistant.
 
-本项目可以提供 Home Assistant 支持的大多数 MQTT 设备的模拟。以下是 Home Assistant 的仪表盘预览：
+Before using this service, you need to configure your Home Assistant and MQTT service.
+
+## Features
+
+This project can simulate most MQTT devices supported by Home Assistant. Here is a preview of the Home Assistant dashboard:
 
 ![preview](docs/dashboard.jpg)
 
-同时你也可以通过修改 `models/__init__.py` 文件来添加自定义的设备模型。
+You can also add custom device models by modifying the `models/__init__.py` file.
 
-可以模拟的设备有：
+The following devices can be simulated:
 
-| 设备类型       | 设备名称          | 设备的功能                                      |
-| -------------- | ----------------- | ----------------------------------------------- |
-| MQTT Device    | MQTT 设备         | 用于通用 MQTT 协议的设备                        |
-| Light          | 灯                | 控制灯的开关、亮度、颜色等                      |
-| BinarySensor   | 二进制传感器      | 检测两种状态（如开/关、移动/静止）的传感器      |
-| Sensor         | 传感器            | 收集和报告数据的设备                            |
-| Switch         | 开关              | 控制电源的开关                                  |
-| Fan            | 风扇              | 控制风扇的开关、速度、方向等                    |
-| Climate        | 气候控制          | 控制空调、加热器等温度设备                      |
-| Humidifier     | 加湿器            | 控制加湿器的开关、湿度等                        |
-| Lock           | 锁                | 控制门锁的开锁、上锁                            |
-| Vacuum         | 扫地机器人        | 控制扫地机器人的启动、停止、清扫模式等          |
-| WaterHeater    | 热水器            | 控制热水器的开关、温度等                        |
-| Button         | 按钮              | 触发一次性操作的设备                            |
-| Valve          | 阀门              | 控制水、气等流体的开关                          |
-| LawnMower      | 割草机            | 控制割草机的启动、停止、割草模式等              |
-| Cover          | 遮挡物            | 控制窗帘、百叶窗等遮挡物的开关、位置等          |
-| Alarm          | 报警器            | 提供报警功能，如入侵报警、烟雾报警等            |
-
-
-你可以通过修改每个类中的 `update_state_mock()` 方法来自定义设备的模拟行为。
+| Device Type  | Device Name     | Device Function                                                    |
+| ------------ | --------------- | ------------------------------------------------------------------ |
+| MQTT Device  | MQTT Device     | Device for generic MQTT protocol                                   |
+| Light        | Light           | Control the on/off, brightness, color, etc. of lights              |
+| BinarySensor | Binary Sensor   | Sensor that detects two states (e.g., open/close, motion/still)    |
+| Sensor       | Sensor          | Device that collects and reports data                              |
+| Switch       | Switch          | Control the power on/off of devices                                |
+| Fan          | Fan             | Control the on/off, speed, direction, etc. of fans                 |
+| Climate      | Climate Control | Control the temperature of air conditioners, heaters, etc.         |
+| Humidifier   | Humidifier      | Control the on/off, humidity, etc. of humidifiers                  |
+| Lock         | Lock            | Control the unlock/lock of doors                                   |
+| Vacuum       | Vacuum          | Control the start/stop, cleaning mode, etc. of vacuum cleaners     |
+| WaterHeater  | Water Heater    | Control the on/off, temperature, etc. of water heaters             |
+| Button       | Button          | Device that triggers one-time operations                           |
+| Valve        | Valve           | Control the on/off of fluids like water, gas, etc.                 |
+| LawnMower    | Lawn Mower      | Control the start/stop, mowing mode, etc. of lawn mowers           |
+| Cover        | Cover           | Control the on/off, position, etc. of blinds, shutters, etc.       |
+| Alarm        | Alarm           | Provide alarm functions such as intrusion alarm, smoke alarm, etc. |
 
 
-## 项目结构
+You can customize the device simulation behavior by modifying the `update_state_mock()` method in each class.
 
-以下是项目的文件结构：
+
+## Project Structure
+
+Here is the file structure of the project:
 
 ```
 .
-├── Makefile                # Makefile 文件
-├── README.md               # 本文件
-├── config.py               # 配置信息, 包括 MQTT 服务器地址、端口等
-├── custom_listener.py      # 自定义监听钩子
-├── dashboard.yaml          # 示例的 Home Assistant 的仪表盘文件
-├── main.py                 # 主程序文件
-├── models                  # MQTT 设备模型
-│   ├── __init__.py         # MQTT 设备模型的初始化文件
-│   └── mock.py             # 模拟行为文件
-├── requirements.txt        # 项目依赖
-└── utils.py                # 工具函数
+├── Makefile                # Makefile file
+├── README.md               # This file
+├── config.py               # Configuration information, including MQTT server address, port, etc.
+├── custom_listener.py      # Custom listener hook
+├── dashboard.yaml          # Example Home Assistant dashboard file
+├── main.py                 # Main program file
+├── models                  # MQTT device models
+│   ├── __init__.py         # Initialization file for MQTT device models
+│   └── mock.py             # Mock behavior file
+├── requirements.txt        # Project dependencies
+└── utils.py                # Utility functions
 ```
 
-## 使用方法
+## Usage
 
-1. 克隆仓库
+1. Clone the repository
 ```bash
 git clone [this-repo]
 ```
 
-2. 配置 MQTT 服务器地址
+2. Configure MQTT server address
 
-修改 `config.py` 文件中的 `BROKER_ADDRESS` 和 `BROKER_PORT` 变量为你的 MQTT 服务器地址和端口。如果你的 MQTT 服务器需要用户名和密码，请修改 `USERNAME` 和 `PASSWORD` 变量。
+Modify the `BROKER_ADDRESS` and `BROKER_PORT` variables in the `config.py` file to your MQTT server address and port. If your MQTT server requires a username and password, modify the `USERNAME` and `PASSWORD` variables.
 
 ```python
 BROKER_ADDRESS = <your-mqtt-server>
@@ -77,48 +81,49 @@ ROOT_PREFIX = "homeassistant"
 
 ```
 
-3. 安装依赖
+3. Install dependencies
 
-你可以使用 `pip` 来安装项目的依赖：
+You can use `pip` to install the project dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Linux 用户可以使用 `make` 命令来配置虚拟环境并安装依赖：
+Linux users can use the `make` command to configure a virtual environment and install dependencies:
 
 ```bash
 make install
 ```
 
-4. 运行程序
+4. Run the program
 
-你可以直接运行 `main.py` 文件来启动 MQTT mock 服务：
+You can directly run the `main.py` file to start the MQTT mock service:
 
 ```bash
 python main.py
 ```
 
-或者使用 `make` 命令：
+Or use the `make` command:
 
 ```bash
 make run
 ```
 
-5. 配置 Home Assistant
+5. Configure Home Assistant
 
-如果一切顺利的话，Home Assistant 将会自动发现你的 MQTT 设备。你可以在 Home Assistant 的仪表盘中看到你的设备。
+If everything goes well, Home Assistant will automatically discover your MQTT devices. You can see your devices in the Home Assistant dashboard.
 
-6. 配置 Home Assistant 的仪表盘
+6. Configure the Home Assistant dashboard
 
-你可以使用我提供的 `dashboard.yaml` 文件来配置 Home Assistant 的仪表盘。你也可以自行配置仪表盘。
+You can use the provided `dashboard.yaml` file to configure the Home Assistant dashboard. You can also customize the dashboard yourself.
 
 
 
-## 贡献
+## Contribution
 
-如果你有任何问题或建议，欢迎提交 issue 或者 PR。
+If you have any questions or suggestions, feel free to submit an issue or PR.
 
-## 许可证
+## License
 
-本项目基于 MIT 许可证进行许可 - 详细信息请参阅 [LICENSE](LICENSE) 文件。
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
