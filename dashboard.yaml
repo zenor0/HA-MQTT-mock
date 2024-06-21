@@ -1,0 +1,421 @@
+views:
+  - title: Home
+  - title: section
+    path: 'n'
+    type: sections
+    max_columns: 3
+    sections:
+      - type: grid
+        cards:
+          - graph: line
+            type: sensor
+            entity: sensor.lc_esp32c3_esp32c3_temperature
+            detail: 2
+            name: ESP32C3 温度
+            hours_to_show: 0.5
+          - graph: line
+            type: sensor
+            entity: sensor.lc_esp32c3_esp32c3_humidity
+            detail: 2
+            name: ESP32C3 湿度
+            hours_to_show: 0.5
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.lc_esp32c3_esp32c3_boot_button
+                name: ESP32C3 按钮
+          - type: horizontal-stack
+            cards:
+              - graph: line
+                type: sensor
+                entity: sensor.openwrt_router_download_speed
+                detail: 2
+                name: Download speed
+                hours_to_show: 1
+          - type: horizontal-stack
+            cards:
+              - graph: line
+                type: sensor
+                entity: sensor.mock_bus_pm2_5chuan_gan_qi
+                detail: 2
+                name: PM2.5
+          - type: tile
+            entity: sensor.mock_bus_ya_li_chuan_gan_qi
+            name: 压力传感器
+          - type: tile
+            entity: sensor.mock_bus_guang_zhao_chuan_gan_qi
+            name: 光照传感器
+          - type: tile
+            entity: sensor.mock_bus_wen_du_chuan_gan_qi
+            name: 温度传感器
+          - type: tile
+            entity: sensor.mock_bus_shi_du_chuan_gan_qi
+            name: 湿度传感器
+          - type: tile
+            entity: binary_sensor.mock_bus_yan_wu_gan_ying
+            name: 烟雾传感器
+          - type: tile
+            entity: binary_sensor.mock_bus_men_chuang_gan_ying_2
+            name: 门窗传感器
+          - type: tile
+            entity: binary_sensor.mock_bus_men_chuang_gan_ying
+            name: 门窗传感器
+          - type: tile
+            entity: binary_sensor.mock_bus_ren_ti_gan_ying
+            name: 人体传感器
+          - type: tile
+            entity: lock.mock_bus_hou_men_suo
+            name: 后门锁
+          - type: custom:mushroom-lock-card
+            entity: lock.mock_bus_suo
+            name: 门锁
+            fill_container: true
+          - type: tile
+            entity: lock.mock_bus_qian_men_suo
+            name: 前门锁
+          - type: tile
+            entity: valve.mock_bus_fa_men
+            name: 阀门
+          - type: tile
+            entity: valve.mock_bus_chu_fang_fa_men
+            name: 厨房阀门
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.mock_bus_deng_guang
+                use_light_color: true
+                show_color_temp_control: true
+                show_brightness_control: true
+                show_color_control: true
+                collapsible_controls: true
+                name: Living Room Light
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.mock_bus_ke_ting_deng_guang
+                use_light_color: true
+                show_color_temp_control: true
+                show_brightness_control: true
+                show_color_control: true
+                collapsible_controls: true
+                name: Bedroom Light
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.mock_bus_wo_shi_deng_guang
+                use_light_color: true
+                show_color_temp_control: true
+                show_brightness_control: true
+                show_color_control: true
+                collapsible_controls: true
+                name: Kitchen Light
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.mock_bus_shu_fang_deng_guang
+                use_light_color: true
+                show_color_temp_control: true
+                show_brightness_control: true
+                show_color_control: true
+                collapsible_controls: true
+                name: Study Room Light
+          - type: tile
+            entity: light.mock_bus_deng_guang
+            name: Living Room Light
+          - type: tile
+            entity: light.mock_bus_shu_fang_deng_guang
+            name: Study Room Light
+          - type: tile
+            entity: light.mock_bus_wo_shi_deng_guang
+            name: Kitchen Light
+          - type: tile
+            entity: light.mock_bus_ke_ting_deng_guang
+            name: Bedroom Light
+      - type: grid
+        cards:
+          - type: custom:vacuum-card
+            entity: vacuum.mock_bus_xi_chen_qi
+          - graph: line
+            type: sensor
+            entity: sensor.mock_bus_wen_du_chuan_gan_qi
+            detail: 2
+            name: 温度
+          - graph: line
+            type: sensor
+            entity: sensor.mock_bus_shi_du_chuan_gan_qi
+            detail: 2
+            name: 湿度
+          - features:
+              - type: humidifier-modes
+                style: dropdown
+              - type: humidifier-toggle
+              - type: target-humidity
+            type: tile
+            entity: humidifier.mock_bus_jia_shi_qi
+            show_entity_picture: false
+            hide_state: false
+            vertical: false
+            state_content:
+              - state
+              - last-changed
+              - humidity
+            name: 加湿器
+          - type: custom:mushroom-climate-card
+            entity: climate.mock_bus_kong_diao
+            collapsible_controls: true
+            show_temperature_control: true
+            fill_container: true
+            hvac_modes:
+              - cool
+              - heat
+              - dry
+              - fan_only
+              - 'off'
+            name: 空调
+          - features:
+              - type: cover-position
+              - type: cover-tilt-position
+              - type: cover-open-close
+            type: tile
+            entity: cover.mock_bus_chuang_hu
+            vertical: false
+            show_entity_picture: false
+            hide_state: false
+            name: 窗户
+          - type: custom:mushroom-fan-card
+            entity: fan.mock_bus_feng_shan
+            collapsible_controls: true
+            show_percentage_control: true
+            show_oscillate_control: true
+            icon_animation: true
+            fill_container: false
+            name: 风扇
+          - type: tile
+            entity: switch.mock_bus_kai_guan
+            name: 开关
+          - type: tile
+            entity: button.mock_bus_an_niu
+            name: 按钮
+          - type: tile
+            entity: water_heater.mock_bus_re_shui_qi
+            name: 热水器
+          - features:
+              - type: alarm-modes
+            type: tile
+            entity: alarm_control_panel.mock_bus_jing_bao
+            name: 警报
+      - type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: humidifier
+                entity: humidifier.mock_bus_jia_shi_qi
+                features:
+                  - type: humidifier-toggle
+                name: 加湿器
+              - type: humidifier
+                entity: humidifier.mock_bus_chu_shi_qi
+                features:
+                  - type: humidifier-toggle
+                name: 除湿器
+          - type: thermostat
+            entity: climate.mock_bus_kong_diao
+            features:
+              - type: climate-hvac-modes
+            show_current_as_primary: false
+            name: 空调
+          - type: custom:mushroom-cover-card
+            entity: cover.mock_bus_chuang_hu
+            show_position_control: true
+            show_buttons_control: true
+            show_tilt_position_control: true
+            fill_container: true
+            layout: horizontal
+            name: 窗户
+          - type: history-graph
+            entities:
+              - entity: sun.sun
+              - entity: lock.mock_bus_suo
+              - entity: binary_sensor.mock_bus_yan_wu_gan_ying
+              - entity: binary_sensor.mock_bus_ren_ti_gan_ying
+      - type: grid
+        cards:
+          - states:
+              - arm_home
+              - arm_away
+              - arm_night
+              - arm_vacation
+            type: alarm-panel
+            entity: alarm_control_panel.mock_bus_jing_bao
+      - type: grid
+        cards:
+          - show_name: true
+            show_icon: true
+            show_state: true
+            type: glance
+            entities:
+              - sensor.sun_next_dawn
+              - sensor.sun_next_dusk
+              - sensor.sun_next_midnight
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.openwrt_router_download_speed
+              - sensor.openwrt_router_upload_speed
+            stat_types:
+              - max
+              - min
+              - mean
+            logarithmic_scale: true
+            hide_legend: true
+            title: 网络
+      - type: grid
+        cards:
+          - type: tile
+            entity: lawn_mower.mock_bus_chu_cao_ji
+      - type: grid
+        cards: []
+  - title: demo
+    path: demo
+    type: sections
+    max_columns: 2
+    sections:
+      - type: grid
+        cards:
+          - graph: line
+            type: sensor
+            entity: sensor.lc_esp32c3_esp32c3_temperature
+            detail: 2
+            name: ESP32C3 温度
+            hours_to_show: 0.5
+          - graph: line
+            type: sensor
+            entity: sensor.lc_esp32c3_esp32c3_humidity
+            detail: 2
+            name: ESP32C3 湿度
+            hours_to_show: 0.5
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.lc_esp32c3_esp32c3_boot_button
+                name: ESP32C3 按钮
+          - features:
+              - type: cover-position
+              - type: cover-tilt-position
+              - type: cover-open-close
+            type: tile
+            entity: cover.mock_bus_chuang_hu
+            vertical: false
+            show_entity_picture: false
+            hide_state: false
+            name: 窗户
+          - features:
+              - type: humidifier-modes
+                style: dropdown
+              - type: humidifier-toggle
+              - type: target-humidity
+            type: tile
+            entity: humidifier.mock_bus_jia_shi_qi
+            show_entity_picture: false
+            hide_state: false
+            vertical: false
+            state_content:
+              - state
+              - last-changed
+              - humidity
+            name: 加湿器
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.mock_bus_deng_guang
+                use_light_color: true
+                show_color_temp_control: true
+                show_brightness_control: true
+                show_color_control: true
+                collapsible_controls: true
+                name: Living Room Light
+      - type: grid
+        cards:
+          - type: thermostat
+            entity: climate.mock_bus_kong_diao
+            features:
+              - type: climate-hvac-modes
+            show_current_as_primary: false
+            name: 空调
+          - type: horizontal-stack
+            cards:
+              - type: humidifier
+                entity: humidifier.mock_bus_jia_shi_qi
+                features:
+                  - type: humidifier-toggle
+                name: 加湿器
+              - type: humidifier
+                entity: humidifier.mock_bus_chu_shi_qi
+                features:
+                  - type: humidifier-toggle
+                name: 除湿器
+  - type: sections
+    max_columns: 2
+    title: simple
+    path: simple
+    sections:
+      - type: grid
+        cards:
+          - type: tile
+            entity: sensor.mock_bus_shi_du_chuan_gan_qi
+            name: 湿度传感器
+          - type: tile
+            entity: sensor.mock_bus_wen_du_chuan_gan_qi
+            name: 温度传感器
+          - type: tile
+            entity: sensor.mock_bus_ya_li_chuan_gan_qi
+            name: 压力传感器
+          - type: tile
+            entity: sensor.mock_bus_guang_zhao_chuan_gan_qi
+            name: 光照传感器
+      - type: grid
+        cards:
+          - type: tile
+            entity: light.mock_bus_shu_fang_deng_guang
+            name: Study Room Light
+          - type: tile
+            entity: light.mock_bus_ke_ting_deng_guang
+            name: Bedroom Light
+          - type: tile
+            entity: light.mock_bus_deng_guang
+            name: Living Room Light
+          - type: tile
+            entity: light.mock_bus_wo_shi_deng_guang
+            name: Kitchen Light
+          - type: custom:mushroom-light-card
+            entity: light.mock_bus_deng_guang
+            use_light_color: false
+            show_brightness_control: true
+            collapsible_controls: true
+            show_color_temp_control: false
+            show_color_control: false
+            fill_container: true
+            icon: mdi:floor-lamp
+          - type: custom:mushroom-light-card
+            entity: light.mock_bus_shu_fang_deng_guang
+            use_light_color: false
+            show_brightness_control: true
+            collapsible_controls: true
+            show_color_temp_control: false
+            show_color_control: false
+            fill_container: true
+            icon: mdi:desk-lamp
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.mock_bus_deng_guang
+                name: Living Room Light
+          - graph: none
+            type: sensor
+            entity: sensor.mock_bus_wen_du_chuan_gan_qi
+            detail: 2
+          - graph: none
+            type: sensor
+            entity: sensor.mock_bus_shi_du_chuan_gan_qi
+            detail: 2
