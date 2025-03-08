@@ -1,129 +1,164 @@
-# HA-MQTT-mock
+# HA-MQTT-mock (重构版)
 
->[!NOTE]
-> Original README.md is in Chinese. This is the English translation by Copilot.
+这个项目提供了一个简单的MQTT模拟服务，用于在Home Assistant中模拟各种MQTT设备。
 
+## 重构改进
 
-This project provides a simple MQTT mock service to simulate various MQTT devices in Home Assistant.
+原始项目已经进行了以下重构和改进：
 
-Before using this service, you need to configure your Home Assistant and MQTT service.
+1. **改进的项目结构**：采用标准Python包结构，使用`src`布局
+2. **更好的配置管理**：使用环境变量和数据类进行配置管理
+3. **模块化设计**：将设备模型分离到独立的文件中
+4. **增强的错误处理**：添加了异常处理和日志记录
+5. **类型注解**：添加了类型提示，提高代码可读性
+6. **测试支持**：添加了单元测试
+7. **命令行界面**：提供了更丰富的命令行选项
+8. **开发工具支持**：添加了代码格式化和检查工具
 
-## Features
+## 功能
 
-This project can simulate most MQTT devices supported by Home Assistant. Here is a preview of the Home Assistant dashboard:
+此项目可以模拟Home Assistant支持的大多数MQTT设备。目前实现的设备类型包括：
 
-![preview](docs/dashboard.jpg)
+- 灯光设备 (Light)
+- 传感器 (Sensor)
+- 二元传感器 (BinarySensor)
 
-You can also add custom device models by modifying the `models/__init__.py` file.
+可以通过添加更多设备模型类来扩展支持的设备类型。
 
-The following devices can be simulated:
-
-| Device Type  | Device Name     | Device Function                                                    |
-| ------------ | --------------- | ------------------------------------------------------------------ |
-| MQTT Device  | MQTT Device     | Device for generic MQTT protocol                                   |
-| Light        | Light           | Control the on/off, brightness, color, etc. of lights              |
-| BinarySensor | Binary Sensor   | Sensor that detects two states (e.g., open/close, motion/still)    |
-| Sensor       | Sensor          | Device that collects and reports data                              |
-| Switch       | Switch          | Control the power on/off of devices                                |
-| Fan          | Fan             | Control the on/off, speed, direction, etc. of fans                 |
-| Climate      | Climate Control | Control the temperature of air conditioners, heaters, etc.         |
-| Humidifier   | Humidifier      | Control the on/off, humidity, etc. of humidifiers                  |
-| Lock         | Lock            | Control the unlock/lock of doors                                   |
-| Vacuum       | Vacuum          | Control the start/stop, cleaning mode, etc. of vacuum cleaners     |
-| WaterHeater  | Water Heater    | Control the on/off, temperature, etc. of water heaters             |
-| Button       | Button          | Device that triggers one-time operations                           |
-| Valve        | Valve           | Control the on/off of fluids like water, gas, etc.                 |
-| LawnMower    | Lawn Mower      | Control the start/stop, mowing mode, etc. of lawn mowers           |
-| Cover        | Cover           | Control the on/off, position, etc. of blinds, shutters, etc.       |
-| Alarm        | Alarm           | Provide alarm functions such as intrusion alarm, smoke alarm, etc. |
-
-
-You can customize the device simulation behavior by modifying the `update_state_mock()` method in each class.
-
-
-## Project Structure
-
-Here is the file structure of the project:
+## 项目结构
 
 ```
 .
-├── Makefile                # Makefile file
-├── README.md               # This file
-├── config.py               # Configuration information, including MQTT server address, port, etc.
-├── custom_listener.py      # Custom listener hook
-├── dashboard.yaml          # Example Home Assistant dashboard file
-├── main.py                 # Main program file
-├── models                  # MQTT device models
-│   ├── __init__.py         # Initialization file for MQTT device models
-│   └── mock.py             # Mock behavior file
-├── requirements.txt        # Project dependencies
-└── utils.py                # Utility functions
+├── Makefile                # 构建和开发工具
+├── README.md               # 项目说明
+├── requirements.txt        # 项目依赖
+├── setup.py                # 包安装配置
+├── src/                    # 源代码目录
+│   └── ha_mqtt_mock/       # 主包
+│       ├── __init__.py     # 包初始化
+│       ├── config.py       # 配置管理
+│       ├── main.py         # 主程序入口
+│       ├── mock.py         # 模拟器核心
+│       ├── models/         # 设备模型
+│       │   ├── __init__.py # 模型初始化
+│       │   ├── base.py     # 基础设备模型
+│       │   ├── light.py    # 灯光设备模型
+│       │   └── sensor.py   # 传感器设备模型
+│       └── utils/          # 工具函数
+│           ├── __init__.py # 工具初始化
+│           ├── logging.py  # 日志工具
+│           └── mqtt_helpers.py # MQTT助手函数
+└── tests/                  # 测试目录
+    ├── __init__.py         # 测试包初始化
+    ├── test_config.py      # 配置测试
+    └── test_models.py      # 模型测试
 ```
 
-## Usage
+## 安装
 
-1. Clone the repository
-```bash
-git clone [this-repo]
-```
-
-2. Configure MQTT server address
-
-Modify the `BROKER_ADDRESS` and `BROKER_PORT` variables in the `config.py` file to your MQTT server address and port. If your MQTT server requires a username and password, modify the `USERNAME` and `PASSWORD` variables.
-
-```python
-BROKER_ADDRESS = <your-mqtt-server>
-BROKER_PORT = 1883
-
-USERNAME = <your-username>
-PASSWORD = <your-password>
-ROOT_PREFIX = "homeassistant"
-
-```
-
-3. Install dependencies
-
-You can use `pip` to install the project dependencies:
+### 使用pip安装
 
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
-Linux users can use the `make` command to configure a virtual environment and install dependencies:
+### 使用Makefile安装
 
 ```bash
+# 标准安装
 make install
+
+# 开发模式安装
+make dev-install
 ```
 
-4. Run the program
+## 配置
 
-You can directly run the `main.py` file to start the MQTT mock service:
+可以通过环境变量或命令行参数配置MQTT连接：
+
+### 环境变量
 
 ```bash
-python main.py
+export MQTT_BROKER_ADDRESS=192.168.1.100
+export MQTT_BROKER_PORT=1883
+export MQTT_USERNAME=your_username
+export MQTT_PASSWORD=your_password
+export MQTT_ROOT_PREFIX=homeassistant
 ```
 
-Or use the `make` command:
+### 命令行参数
+
+```bash
+ha-mqtt-mock --broker 192.168.1.100 --port 1883 --username your_username --password your_password
+```
+
+## 使用方法
+
+### 命令行运行
+
+安装后可以直接运行：
+
+```bash
+ha-mqtt-mock
+```
+
+或者使用Makefile：
 
 ```bash
 make run
 ```
 
-5. Configure Home Assistant
+### 命令行选项
 
-If everything goes well, Home Assistant will automatically discover your MQTT devices. You can see your devices in the Home Assistant dashboard.
+```
+usage: ha-mqtt-mock [-h] [-b BROKER] [-p PORT] [-u USERNAME] [--password PASSWORD] [-i INTERVAL] [-v] [--no-rich] [--log-file LOG_FILE]
 
-6. Configure the Home Assistant dashboard
+Home Assistant MQTT模拟器
 
-You can use the provided `dashboard.yaml` file to configure the Home Assistant dashboard. You can also customize the dashboard yourself.
+options:
+  -h, --help            显示帮助信息并退出
+  -b BROKER, --broker BROKER
+                        MQTT服务器地址
+  -p PORT, --port PORT  MQTT服务器端口
+  -u USERNAME, --username USERNAME
+                        MQTT用户名
+  --password PASSWORD   MQTT密码
+  -i INTERVAL, --interval INTERVAL
+                        模拟更新间隔（秒）
+  -v, --verbose         启用详细日志
+  --no-rich             禁用富文本日志格式
+  --log-file LOG_FILE   日志文件路径
+```
 
+## 开发
 
+### 代码格式化
 
-## Contribution
+```bash
+make format
+```
 
-If you have any questions or suggestions, feel free to submit an issue or PR.
+### 代码检查
 
-## License
+```bash
+make lint
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### 运行测试
 
+```bash
+make test
+```
+
+## 扩展
+
+要添加新的设备类型，只需创建一个继承自`MQTTDevice`的新类，并实现必要的方法：
+
+1. 在`src/ha_mqtt_mock/models/`目录下创建新的设备模型文件
+2. 实现`_get_discovery_payload()`方法，提供设备的发现信息
+3. 实现`update_state_mock()`方法，提供模拟行为
+4. 在`src/ha_mqtt_mock/models/__init__.py`中导出新的设备类
+
+## 许可证
+
+本项目采用MIT许可证 - 详见[LICENSE](LICENSE)文件。 
