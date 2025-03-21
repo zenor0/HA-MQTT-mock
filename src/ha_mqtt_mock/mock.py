@@ -16,6 +16,7 @@ class MockDeviceManager:
         self.devices: List[MQTTDevice] = []
         self.command_device_mapping: Dict[str, MQTTDevice] = {}
         self.is_running = False
+        self.mock_task = None  # 用于存储模拟任务的引用
     
     def add_device(self, device: MQTTDevice) -> None:
         """
@@ -147,9 +148,13 @@ class MockDeviceManager:
         except asyncio.CancelledError:
             logger.info("设备模拟任务已取消")
             self.is_running = False
+            # 重新抛出，让调用者知道任务已取消
+            raise
         except Exception as e:
             logger.exception(f"设备模拟过程中发生错误: {e}")
             self.is_running = False
+            # 重新抛出异常，让调用者处理
+            raise
     
     def stop_mock(self) -> None:
         """停止模拟设备状态变化"""

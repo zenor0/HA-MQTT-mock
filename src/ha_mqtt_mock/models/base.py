@@ -5,15 +5,15 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 
-from ..config import config
-from ..utils.mqtt_helpers import publish_discovery, publish_state
+from ha_mqtt_mock.config import MQTTConfig
+from ha_mqtt_mock.utils.mqtt_helpers import publish_discovery, publish_state
 
 logger = logging.getLogger(__name__)
 
 class MQTTDevice(ABC):
     """MQTT设备基类，所有设备模型都应该继承自这个类"""
     
-    def __init__(self, component: str, object_id: str, name: Optional[str] = None) -> None:
+    def __init__(self, component: str, object_id: str, name: Optional[str] = None, state: Optional[Dict[str, Any]] = None, *args, **kwargs) -> None:
         """
         初始化MQTT设备
         
@@ -25,7 +25,10 @@ class MQTTDevice(ABC):
         self.component = component
         self.object_id = object_id
         self.name = name if name else object_id.replace("_", " ").title()
-        self.state: Dict[str, Any] = {}
+        self.state: Dict[str, Any] = state if state else {}
+        
+        # 获取配置实例
+        config = MQTTConfig.get_instance()
         
         # 设置主题
         self.base_topic = f"{config.root_prefix}/{self.component}/{self.object_id}"

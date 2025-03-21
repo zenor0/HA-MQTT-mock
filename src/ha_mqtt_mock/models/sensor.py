@@ -77,7 +77,8 @@ class Sensor(MQTTDevice):
     }
     
     def __init__(self, object_id: str, name: Optional[str] = None, 
-                 sensor_type: str = "temperature") -> None:
+                 sensor_type: str = "temperature",
+                 state: dict = None, *args, **kwargs) -> None:
         """
         初始化传感器设备
         
@@ -86,8 +87,6 @@ class Sensor(MQTTDevice):
             name: 设备显示名称
             sensor_type: 传感器类型
         """
-        super().__init__(component="sensor", object_id=object_id, name=name)
-        
         # 设置传感器类型
         if sensor_type not in self.SENSOR_TYPES:
             raise ValueError(f"不支持的传感器类型: {sensor_type}")
@@ -95,8 +94,10 @@ class Sensor(MQTTDevice):
         self.sensor_type = sensor_type
         self.sensor_config = self.SENSOR_TYPES[sensor_type]
         
+        super().__init__(component="sensor", object_id=object_id, name=name, *args, **kwargs)
+        
         # 设置默认状态
-        self.state = {
+        self.state = state or {
             self.sensor_type: self._get_random_value()
         }
     
@@ -186,7 +187,8 @@ class BinarySensor(MQTTDevice):
     }
     
     def __init__(self, object_id: str, name: Optional[str] = None, 
-                 sensor_type: str = "motion") -> None:
+                 sensor_type: str = "motion",
+                 state: dict = None, *args, **kwargs) -> None:
         """
         初始化二元传感器设备
         
@@ -195,8 +197,6 @@ class BinarySensor(MQTTDevice):
             name: 设备显示名称
             sensor_type: 传感器类型
         """
-        super().__init__(component="binary_sensor", object_id=object_id, name=name)
-        
         # 设置传感器类型
         if sensor_type not in self.SENSOR_TYPES:
             raise ValueError(f"不支持的二元传感器类型: {sensor_type}")
@@ -204,8 +204,10 @@ class BinarySensor(MQTTDevice):
         self.sensor_type = sensor_type
         self.sensor_config = self.SENSOR_TYPES[sensor_type]
         
+        super().__init__(component="binary_sensor", object_id=object_id, name=name, *args, **kwargs)
+        
         # 设置默认状态
-        self.state = {
+        self.state = state or {
             "state": self.sensor_config["payload_off"]
         }
     

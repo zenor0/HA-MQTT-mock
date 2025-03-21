@@ -7,7 +7,7 @@
 原始项目已经进行了以下重构和改进：
 
 1. **改进的项目结构**：采用标准Python包结构，使用`src`布局
-2. **更好的配置管理**：使用环境变量和数据类进行配置管理
+2. **更好的配置管理**：使用环境变量和数据类进行配置管理，支持通过.env文件配置
 3. **模块化设计**：将设备模型分离到独立的文件中
 4. **增强的错误处理**：添加了异常处理和日志记录
 5. **类型注解**：添加了类型提示，提高代码可读性
@@ -74,7 +74,7 @@ make dev-install
 
 ## 配置
 
-可以通过环境变量或命令行参数配置MQTT连接：
+可以通过环境变量、.env文件或命令行参数配置MQTT连接：
 
 ### 环境变量
 
@@ -84,6 +84,26 @@ export MQTT_BROKER_PORT=1883
 export MQTT_USERNAME=your_username
 export MQTT_PASSWORD=your_password
 export MQTT_ROOT_PREFIX=homeassistant
+```
+
+### 使用.env文件
+
+你可以在项目目录创建一个.env文件来配置MQTT连接。程序会按以下顺序查找.env文件：
+
+1. 当前工作目录
+2. 项目根目录
+3. 由ENV_FILE环境变量指定的路径
+
+.env文件示例：
+
+```
+# MQTT服务器配置
+MQTT_BROKER_ADDRESS=192.168.1.100
+MQTT_BROKER_PORT=1883
+MQTT_USERNAME=your_username
+MQTT_PASSWORD=your_password
+MQTT_CLIENT_ID=custom_client_id
+MQTT_ROOT_PREFIX=homeassistant
 ```
 
 ### 命令行参数

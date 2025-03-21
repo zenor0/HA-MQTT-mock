@@ -1,0 +1,544 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "HA-MQTT-Mock API",
+        "description": "Home Assistant MQTT设备模拟器API",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/devices": {
+            "get": {
+                "tags": [
+                    "设备"
+                ],
+                "summary": "List Devices",
+                "description": "获取所有设备列表",
+                "operationId": "list_devices_api_devices_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DeviceResponse"
+                                    },
+                                    "type": "array",
+                                    "title": "Response List Devices Api Devices Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "设备"
+                ],
+                "summary": "Create Device",
+                "description": "创建新设备",
+                "operationId": "create_device_api_devices_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeviceCreate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeviceResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/devices/{device_id}": {
+            "get": {
+                "tags": [
+                    "设备"
+                ],
+                "summary": "Get Device",
+                "description": "获取指定设备详情",
+                "operationId": "get_device_api_devices__device_id__get",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "设备ID",
+                            "title": "Device Id"
+                        },
+                        "description": "设备ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeviceResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "设备"
+                ],
+                "summary": "Update Device",
+                "description": "更新设备配置",
+                "operationId": "update_device_api_devices__device_id__put",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "设备ID",
+                            "title": "Device Id"
+                        },
+                        "description": "设备ID"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeviceUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeviceResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "设备"
+                ],
+                "summary": "Delete Device",
+                "description": "删除设备",
+                "operationId": "delete_device_api_devices__device_id__delete",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "设备ID",
+                            "title": "Device Id"
+                        },
+                        "description": "设备ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/devices/{device_id}/state": {
+            "put": {
+                "tags": [
+                    "设备状态"
+                ],
+                "summary": "Update Device State",
+                "description": "更新设备状态",
+                "operationId": "update_device_state_api_devices__device_id__state_put",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "设备ID",
+                            "title": "Device Id"
+                        },
+                        "description": "设备ID"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeviceState"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeviceState"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "设备状态"
+                ],
+                "summary": "Get Device State",
+                "description": "获取设备状态",
+                "operationId": "get_device_state_api_devices__device_id__state_get",
+                "parameters": [
+                    {
+                        "name": "device_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "设备ID",
+                            "title": "Device Id"
+                        },
+                        "description": "设备ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeviceState"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/reload": {
+            "post": {
+                "tags": [
+                    "系统"
+                ],
+                "summary": "Reload Devices",
+                "description": "重新加载设备配置",
+                "operationId": "reload_devices_api_reload_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DeviceCreate": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "title": "Type",
+                        "description": "设备类型，如light、sensor、binary_sensor"
+                    },
+                    "object_id": {
+                        "type": "string",
+                        "title": "Object Id",
+                        "description": "设备唯一标识"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "设备名称，如不提供则使用object_id"
+                    },
+                    "sensor_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sensor Type",
+                        "description": "传感器类型，仅对sensor和binary_sensor有效"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "object_id"
+                ],
+                "title": "DeviceCreate",
+                "description": "设备创建数据模型"
+            },
+            "DeviceResponse": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "title": "Type",
+                        "description": "设备类型，如light、sensor、binary_sensor"
+                    },
+                    "object_id": {
+                        "type": "string",
+                        "title": "Object Id",
+                        "description": "设备唯一标识"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "设备名称，如不提供则使用object_id"
+                    },
+                    "sensor_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sensor Type",
+                        "description": "传感器类型，仅对sensor和binary_sensor有效"
+                    },
+                    "state": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "State",
+                        "description": "设备当前状态",
+                        "default": {}
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "object_id"
+                ],
+                "title": "DeviceResponse",
+                "description": "设备响应数据模型"
+            },
+            "DeviceState": {
+                "properties": {
+                    "state": {
+                        "type": "object",
+                        "title": "State",
+                        "description": "设备状态"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "state"
+                ],
+                "title": "DeviceState",
+                "description": "设备状态数据模型"
+            },
+            "DeviceUpdate": {
+                "properties": {
+                    "type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Type",
+                        "description": "设备类型，如light、sensor、binary_sensor"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "设备名称"
+                    },
+                    "sensor_type": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Sensor Type",
+                        "description": "传感器类型，仅对sensor和binary_sensor有效"
+                    }
+                },
+                "type": "object",
+                "title": "DeviceUpdate",
+                "description": "设备更新数据模型"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}

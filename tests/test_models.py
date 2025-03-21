@@ -50,7 +50,8 @@ def test_mqtt_device_publish_state():
     assert result is True
     mock_client.publish.assert_called_once_with(
         device.state_topic,
-        json.dumps(device.state)
+        json.dumps(device.state),
+        retain=False
     )
 
 def test_light_device():

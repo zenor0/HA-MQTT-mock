@@ -3,14 +3,15 @@
 import random
 from typing import Any, Dict, List, Optional
 
-from ..utils.mqtt_helpers import generate_device_info
-from .base import MQTTDevice
+from ha_mqtt_mock.utils.mqtt_helpers import generate_device_info
+from ha_mqtt_mock.models.base import MQTTDevice
 
 class Light(MQTTDevice):
     """灯光设备模型类"""
     
     def __init__(self, object_id: str, name: Optional[str] = None, 
-                 effects: Optional[List[str]] = None) -> None:
+                 effects: Optional[List[str]] = None,
+                 state: dict = None, *args, **kwargs) -> None:
         """
         初始化灯光设备
         
@@ -19,19 +20,19 @@ class Light(MQTTDevice):
             name: 设备显示名称
             effects: 灯光效果列表
         """
-        super().__init__(component="light", object_id=object_id, name=name)
-        
-        # 设置默认效果列表
-        self.effects = effects or ["rainbow", "colorloop", "night", "relax", "concentrate"]
-        
         # 设置默认状态
-        self.state = {
+        INIT_STATE = {
             "state": "OFF",
             "brightness": 255,
             "color_mode": "rgb",
             "color": {"r": 255, "g": 255, "b": 255},
             "effect": "none",
         }
+
+        # 设置默认效果列表
+        self.effects = effects or ["rainbow", "colorloop", "night", "relax", "concentrate"]
+        
+        super().__init__(component="light", object_id=object_id, name=name, state=INIT_STATE, *args, **kwargs)
     
     def _get_discovery_payload(self) -> Dict[str, Any]:
         """

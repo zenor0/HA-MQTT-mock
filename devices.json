@@ -1,0 +1,89 @@
+[
+  {
+    "type": "light",
+    "object_id": "rgb_light_bedroom",
+    "name": "卧室灯光",
+    "state": {
+      "state": "ON",
+      "brightness": 136,
+      "color_mode": "rgb",
+      "color": {
+        "r": 66,
+        "g": 204,
+        "b": 231
+      },
+      "effect": "night"
+    }
+  },
+  {
+    "type": "sensor",
+    "object_id": "temp_sensor",
+    "name": "温度传感器",
+    "sensor_type": "temperature",
+    "state": {
+      "temperature": 18.69
+    }
+  },
+  {
+    "type": "sensor",
+    "object_id": "humidity_sensor",
+    "name": "湿度传感器",
+    "sensor_type": "humidity",
+    "state": {
+      "humidity": 58.95
+    }
+  },
+  {
+    "type": "sensor",
+    "object_id": "pressure_sensor",
+    "name": "压力传感器",
+    "sensor_type": "pressure",
+    "state": {
+      "pressure": 1003.02
+    }
+  },
+  {
+    "type": "binary_sensor",
+    "object_id": "motion_sensor",
+    "name": "人体感应",
+    "sensor_type": "motion",
+    "state": {
+      "state": "clear"
+    }
+  },
+  {
+    "type": "binary_sensor",
+    "object_id": "door_sensor",
+    "name": "门窗感应",
+    "sensor_type": "door",
+    "state": {
+      "state": "open"
+    }
+  },
+  {
+    "type": "sensor",
+    "object_id": "nihao",
+    "name": "ssss",
+    "sensor_type": "humidity",
+    "state": {
+      "humidity": 43.51
+    }
+  },
+  {
+    "type": "light",
+    "object_id": "new",
+    "name": "newlight",
+    "sensor_type": "",
+    "state": {
+      "state": "ON",
+      "brightness": 237,
+      "color_mode": "rgb",
+      "color": {
+        "r": 75,
+        "g": 109,
+        "b": 98
+      },
+      "effect": "rainbow"
+    }
+  }
+]

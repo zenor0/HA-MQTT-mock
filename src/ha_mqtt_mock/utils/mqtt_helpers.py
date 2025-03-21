@@ -2,8 +2,9 @@ import json
 import logging
 from typing import Any, Dict, Optional
 
-from ..config import config
+from ..config import MQTTConfig
 
+config = MQTTConfig.get_instance()
 logger = logging.getLogger(__name__)
 
 def publish_discovery(client, component: str, object_id: str, payload: Dict[str, Any], retain: bool = True) -> None:

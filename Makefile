@@ -1,32 +1,33 @@
 .PHONY: install run test lint format clean uninstall dev-install
+VENV_PATH = .venv
 
 # 安装依赖
 install:
-	python3 -m venv venv
+	python3 -m venv $(VENV_PATH)
 	venv/bin/pip install -r requirements.txt
 
 # 开发模式安装
 dev-install:
-	python3 -m venv venv
-	venv/bin/pip install -r requirements.txt
-	venv/bin/pip install -e .
+	python3 -m venv $(VENV_PATH)
+	$(VENV_PATH)/bin/pip install -r requirements.txt
+	$(VENV_PATH)/bin/pip install -e .
 
 # 运行程序
 run:
-	venv/bin/python -m ha_mqtt_mock.main
+	$(VENV_PATH)/bin/python -m ha_mqtt_mock.main
 
 # 运行测试
 test:
-	venv/bin/pytest tests/
+	$(VENV_PATH)/bin/pytest tests/
 
 # 代码格式化
 format:
-	venv/bin/black src/ tests/
-	venv/bin/isort src/ tests/
+	$(VENV_PATH)/bin/black src/ tests/
+	$(VENV_PATH)/bin/isort src/ tests/
 
 # 代码检查
 lint:
-	venv/bin/flake8 src/ tests/
+	$(VENV_PATH)/bin/flake8 src/ tests/
 
 # 清理临时文件
 clean:
@@ -36,4 +37,4 @@ clean:
 
 # 卸载
 uninstall:
-	rm -rf venv/
+	rm -rf $(VENV_PATH)/
