@@ -1,4 +1,3 @@
-import json
 from typing import Any, Dict
 
 from ha_mqtt_mock.utils.mqtt_helpers import generate_device_info
@@ -23,15 +22,14 @@ class Humidifier(MQTTDevice):
             raise ValueError(f"Invalid device class: {type}")
 
         self.state |= {"humidity": 50, "target_humidity": 50, "mode": "normal"}
-        self.type = type
+        self.device_type = device_type or self.DEVICE_CLASSES[0]
         self.name = name
-        self.discovery_payload = self._get_discovery_payload()
 
     def _get_discovery_payload(self):
         payload = {
             "name": self.name,
             "unique_id": self.object_id,
-            "device_class": self.type,
+            "device_class": self.device_type,
             "state_topic": self.state_topic,
             "state_value_template": "{{ value_json.state }}",
             # "action_topic": f"{self.home_topic}/action",
@@ -62,5 +60,5 @@ class Humidifier(MQTTDevice):
         }
 
         payload["device"] = generate_device_info(self.name)
-        return json.dumps(payload)
+        return payload
 

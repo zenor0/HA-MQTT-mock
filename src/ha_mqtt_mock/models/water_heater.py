@@ -1,7 +1,5 @@
 """热水器设备模型"""
 
-import json
-import random
 from typing import Any, Dict, List, Optional
 
 from ha_mqtt_mock.utils.mqtt_helpers import generate_device_info

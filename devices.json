@@ -59,5 +59,98 @@
     "state": {
       "state": "open"
     }
+  },
+  {
+    "type": "button",
+    "object_id": "button_bedroom",
+    "name": "卧室按钮",
+    "state": {
+      "state": "off"
+    }
+  },
+  {
+    "type": "switch",
+    "object_id": "switch_bedroom",
+    "name": "卧室开关",
+    "state": {
+      "state": "off"
+    }
+  },
+  {
+    "type": "fan",
+    "object_id": "fan_bedroom",
+    "name": "卧室风扇",
+    "state": {
+      "state": "off"
+    }
+  },
+  {
+    "type": "climate",
+    "object_id": "climate_bedroom",
+    "name": "卧室空调",
+    "state": {
+      "state": "off",
+      "mode": "cool",
+      "temperature": 25
+    }
+  },
+  {
+    "type": "humidifier",
+    "object_id": "humidifier_bedroom",
+    "name": "卧室加湿器",
+    "state": {
+      "state": "off"
+    }
+  },
+  {
+    "type": "lock",
+    "object_id": "lock_bedroom",
+    "name": "卧室门锁",
+    "state": {
+      "state": "locked"
+    }
+  },
+  {
+    "type": "vacuum",
+    "object_id": "vacuum_bedroom",
+    "name": "卧室扫地机器人",
+    "state": {
+    }
+  },
+  {
+    "type": "water_heater",
+    "object_id": "water_heater_bedroom",
+    "name": "卧室热水器",
+    "state": {
+      "state": "off"
+    }
+  },
+  {
+    "type": "valve",
+    "object_id": "valve_bedroom",
+    "name": "卧室水阀",
+    "state": {
+    }
+  },
+  {
+    "type": "lawn_mower",
+    "object_id": "lawn_mower_bedroom",
+    "name": "卧室草坪机器人",
+    "state": {
+    }
+  },
+  {
+    "type": "cover",
+    "object_id": "cover_bedroom",
+    "name": "卧室窗帘",
+    "state": {
+    }
+  },
+  {
+    "type": "alarm",
+    "object_id": "alarm_bedroom",
+    "name": "卧室报警器",
+    "state": {
+    }
   }
 ]

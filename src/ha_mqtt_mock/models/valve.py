@@ -1,12 +1,14 @@
 """阀门设备模型"""
 
-import json
 import random
 from typing import Any, Dict, Optional
 
 from ha_mqtt_mock.utils.mqtt_helpers import generate_device_info
 from ha_mqtt_mock.models.base import MQTTDevice
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Valve(MQTTDevice):
     """阀门设备模型类"""
@@ -55,9 +57,9 @@ class Valve(MQTTDevice):
             "state_topic": self.state_topic,
             "state_template": "{{ value_json.state }}",
             "reports_position": True,
-            "payload_open": "OPEN",
-            "payload_close": "CLOSE",
-            "payload_stop": "STOP"
+            # "payload_open": '"open"',
+            # "payload_close": '"close"',
+            # "payload_stop": '"stop"'
         }
 
         payload["device"] = generate_device_info(self.name)
@@ -74,6 +76,7 @@ class Valve(MQTTDevice):
         Returns:
             bool: 更新是否成功
         """
+        logger.info(f"更新阀门设备状态: {payload}, type: {type(payload)}")
         # 处理命令
         if "position" in payload:
             position = int(payload["position"])

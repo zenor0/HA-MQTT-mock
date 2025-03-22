@@ -2,7 +2,7 @@
 
 import asyncio
 import logging
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional
 
 from ha_mqtt_mock.models import MQTTDevice
 

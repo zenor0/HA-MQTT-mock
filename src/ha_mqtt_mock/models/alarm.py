@@ -1,6 +1,5 @@
 """报警控制面板设备模型"""
 
-import json
 import random
 from typing import Any, Dict, List, Optional
 

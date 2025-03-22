@@ -1,4 +1,3 @@
-import json
 from typing import Any, Dict
 
 from ha_mqtt_mock.utils.mqtt_helpers import generate_device_info
@@ -19,7 +18,6 @@ class Fan(MQTTDevice):
         )
 
         self.name = name
-        self.discovery_payload = self._get_discovery_payload()
 
     def _get_discovery_payload(self):
         payload = {
@@ -41,4 +39,4 @@ class Fan(MQTTDevice):
         }
 
         payload["device"] = generate_device_info(self.name)
-        return json.dumps(payload)
+        return payload

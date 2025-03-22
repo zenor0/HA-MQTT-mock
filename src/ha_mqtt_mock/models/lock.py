@@ -1,6 +1,5 @@
 """锁设备模型"""
 
-import json
 import random
 from typing import Any, Dict, Optional
 

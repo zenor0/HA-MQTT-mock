@@ -1,4 +1,3 @@
-import json
 from typing import Any, Dict
 
 from ha_mqtt_mock.utils.mqtt_helpers import generate_device_info
@@ -31,4 +30,4 @@ class Switch(MQTTDevice):
         }
 
         payload["device"] = generate_device_info(self.name)
-        return json.dumps(payload)
+        return payload

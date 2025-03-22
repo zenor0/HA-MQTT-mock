@@ -3,11 +3,8 @@
 import asyncio
 import logging
 import signal
-from typing import List, Optional, Tuple
 
-import paho.mqtt.client as mqtt
 import uvicorn
-from fastapi import FastAPI
 
 from ha_mqtt_mock import __version__
 from ha_mqtt_mock.api import create_app
