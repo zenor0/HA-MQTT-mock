@@ -1,12 +1,14 @@
 [project]
 name = "ha-mqtt-mock"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.2.0"
+description = "Home Assistant MQTT设备模拟器"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi>=0.115.11",
     "python-dotenv>=1.0.1",
+    "fastapi>=0.115.11",
     "uvicorn>=0.34.0",
     "websockets>=15.0.1",
+    "rich>=13.9.4",
+    "paho-mqtt>=2.1.0",
 ]

@@ -8,18 +8,10 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union, Type
 
-from .models.base import MQTTDevice
-from .models import Light, Sensor, BinarySensor
+from ha_mqtt_mock.models import MQTTDevice
+from ha_mqtt_mock.models import DEVICE_TYPE_MAP
 
 logger = logging.getLogger(__name__)
-
-# 设备类型映射
-DEVICE_TYPE_MAP = {
-    "light": Light,
-    "sensor": Sensor,
-    "binary_sensor": BinarySensor,
-}
-
 class DeviceConfig:
     """设备配置管理类"""
     

@@ -35,10 +35,7 @@ class MQTTDevice(ABC):
         self.state_topic = f"{self.base_topic}/state"
         self.command_topic = f"{self.base_topic}/set"
         self.discovery_topic = f"{self.base_topic}/config"
-        
-        # 设置发现负载
-        self.discovery_payload = self._get_discovery_payload()
-    
+
     @abstractmethod
     def _get_discovery_payload(self) -> Dict[str, Any]:
         """
@@ -61,7 +58,7 @@ class MQTTDevice(ABC):
                 client, 
                 self.component, 
                 self.object_id, 
-                self.discovery_payload, 
+                self._get_discovery_payload(),
                 retain=True
             )
         except Exception as e:

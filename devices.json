@@ -59,31 +59,5 @@
     "state": {
       "state": "open"
     }
-  },
-  {
-    "type": "sensor",
-    "object_id": "nihao",
-    "name": "ssss",
-    "sensor_type": "humidity",
-    "state": {
-      "humidity": 43.51
-    }
-  },
-  {
-    "type": "light",
-    "object_id": "new",
-    "name": "newlight",
-    "sensor_type": "",
-    "state": {
-      "state": "ON",
-      "brightness": 237,
-      "color_mode": "rgb",
-      "color": {
-        "r": 75,
-        "g": 109,
-        "b": 98
-      },
-      "effect": "rainbow"
-    }
   }
 ]

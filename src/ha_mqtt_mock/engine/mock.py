@@ -4,7 +4,7 @@ import asyncio
 import logging
 from typing import Dict, List, Optional, Union
 
-from .models.base import MQTTDevice
+from ha_mqtt_mock.models import MQTTDevice
 
 logger = logging.getLogger(__name__)
 

@@ -91,10 +91,10 @@ class Sensor(MQTTDevice):
         if sensor_type not in self.SENSOR_TYPES:
             raise ValueError(f"不支持的传感器类型: {sensor_type}")
         
+        super().__init__(component="sensor", object_id=object_id, name=name, *args, **kwargs)
+
         self.sensor_type = sensor_type
         self.sensor_config = self.SENSOR_TYPES[sensor_type]
-        
-        super().__init__(component="sensor", object_id=object_id, name=name, *args, **kwargs)
         
         # 设置默认状态
         self.state = state or {
@@ -201,10 +201,10 @@ class BinarySensor(MQTTDevice):
         if sensor_type not in self.SENSOR_TYPES:
             raise ValueError(f"不支持的二元传感器类型: {sensor_type}")
         
+        super().__init__(component="binary_sensor", object_id=object_id, name=name, *args, **kwargs)
+        
         self.sensor_type = sensor_type
         self.sensor_config = self.SENSOR_TYPES[sensor_type]
-        
-        super().__init__(component="binary_sensor", object_id=object_id, name=name, *args, **kwargs)
         
         # 设置默认状态
         self.state = state or {

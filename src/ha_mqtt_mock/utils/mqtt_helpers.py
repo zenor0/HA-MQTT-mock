@@ -3,11 +3,12 @@ import logging
 from typing import Any, Dict, Optional
 
 from ..config import MQTTConfig
+import paho.mqtt.client as mqtt
 
 config = MQTTConfig.get_instance()
 logger = logging.getLogger(__name__)
 
-def publish_discovery(client, component: str, object_id: str, payload: Dict[str, Any], retain: bool = True) -> None:
+def publish_discovery(client: mqtt.Client, component: str, object_id: str, payload: Dict[str, Any], retain: bool = True) -> None:
     """
     发布MQTT设备发现信息到Home Assistant
     
@@ -32,7 +33,7 @@ def publish_discovery(client, component: str, object_id: str, payload: Dict[str,
     except Exception as e:
         logger.exception(f"发布发现信息时发生错误: {e}")
 
-def publish_state(client, topic: str, state: Dict[str, Any], retain: bool = False) -> bool:
+def publish_state(client: mqtt.Client, topic: str, state: Dict[str, Any], retain: bool = False) -> bool:
     """
     发布设备状态信息
     

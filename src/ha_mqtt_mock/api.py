@@ -9,8 +9,8 @@ from fastapi import FastAPI, HTTPException, Path, Body, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from .device_config import DeviceConfig
-from .mock import MockDeviceManager
+from .engine import DeviceConfig
+from .engine import MockDeviceManager
 
 logger = logging.getLogger(__name__)
 

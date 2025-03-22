@@ -8,6 +8,10 @@ from dataclasses import dataclass, field
 
 from dotenv import load_dotenv
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 # 首先尝试从当前目录加载.env文件
 if Path('.env').exists():
     load_dotenv()
@@ -39,6 +43,7 @@ class MQTTConfig(metaclass=Singleton):
     
     def __post_init__(self):
         """验证配置"""
+        logger.debug(f"MQTT配置: {self}")
         if not self.broker_address:
             raise ValueError("MQTT Broker地址不能为空")
         

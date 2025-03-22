@@ -20,8 +20,11 @@ class Light(MQTTDevice):
             name: 设备显示名称
             effects: 灯光效果列表
         """
+        
+        super().__init__(component="light", object_id=object_id, name=name, *args, **kwargs)
+
         # 设置默认状态
-        INIT_STATE = {
+        self.state = {
             "state": "OFF",
             "brightness": 255,
             "color_mode": "rgb",
@@ -32,7 +35,6 @@ class Light(MQTTDevice):
         # 设置默认效果列表
         self.effects = effects or ["rainbow", "colorloop", "night", "relax", "concentrate"]
         
-        super().__init__(component="light", object_id=object_id, name=name, state=INIT_STATE, *args, **kwargs)
     
     def _get_discovery_payload(self) -> Dict[str, Any]:
         """
